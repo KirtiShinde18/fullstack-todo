@@ -19,7 +19,12 @@ const app = express()
 
 // app.use(limiter)
 
-app.use(cors({origin : "http://localhost:3000", credentials: true})) // middleware
+app.use(cors({
+    origin : 
+        process.env.NODE_ENV === "production"
+            ? "https://fullstack-client-seven.vercel.app"
+            : "http://localhost:3000",
+    credentials: true})) // middleware
 
 app.use(express.json()) // for req.body
 app.use(cookieParser()) // for req.cookies
